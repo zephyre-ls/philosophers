@@ -14,10 +14,10 @@
 | `pthread_mutex_destroy`   | `int pthread_mutex_destroy(pthread_mutex_t *mutex);`                                            | Détruit le cadenas quand on en a plus besoin.                                      |
 
 ### Arguments de philo
-- `number_of_philosophers` : nbr de philo à table
-- `time_to_die` : temps avant qu’un philo meure s’il ne mange pas
-- `time_to_eat` : temps du repas d'un philo
-- `time_to_sleep` : temps du sommeil d'un philo
+- `number_of_philosophers` : nbr de philo à table = nbr de fork
+- `time_to_die` : temps avant qu’un philo meure s’il ne mange pas en milliseconde
+- `time_to_eat` : temps du repas d'un philo en miliseconde 
+- `time_to_sleep` : temps du sommeil d'un philo en miliseconde 
 - `number_of_times_each_philosopher_must_eat` : (optionnel?bonus?) combien de fois chaque philosophe doit manger
 
 ### Sujet _ Philo 
@@ -111,7 +111,40 @@ _ Chaque core peut exe un thread à la fois. Si CPU 1 coeur = 1 thread à la foi
 - Conditionnel = ? 
 
 ### Dans le projet = 
+
 - Donc 1 thread représente un philo 
 - Chaque philo va alterner entre 3 etats = penser, manger, dormir
 - La ressource partagé c'est les fourchettes. MUTEX sur les fourchettes !
 - Fixé un ordre fixe pour la prises des fourchettes 
+- Nbr de fourchette = nbr de philo 
+- Pour manger des sphaghettos = 2 fourchettes, le philo doit prendre 1 a sa droit 1 a sa gauche
+- le philo PENSE a sa fourchette pour manger
+- le philo MANGE et repose ses fourchettes
+- le philo DORT 
+- la simulation STOP = un philo meurt de faim
+- Chaque philo doit manger et pas mourir de faim. 
+- Les philos ne parlent pas entre eux, ils ne savent pas non plus si qql va mourir.
+- Position sur la table : chaque philo à un num allant de 1 + nbr de philo.
+- Le numéro 1 est assis entre le dernier et le 2nd. 
+- Le numéro 2 est assis entre numéro 1 ( a sa gauche) n°3 ( a sa droite)
+- AFFICHAGE 
+- Chaque fois qu'un philo change d'état on doit afficher un messages spécifiant sont étant :
+````
+Prend une fork = timestamp_in_ms X has taken a fork
+Mange = timestamp_in_ms X is eating
+Dodo = timestamp_in_ms X is sleeping
+Pense à manger = timestamp_in_ms X is thinking
+Meurt = timestamp_in_ms X died
+timestamp = temps en miliseconde, et X = n° du philo
+````
+- 1 seconde = 1 000 milliseconde 
+- Les messages ne doivent pas se chevaucher 
+- Si un philo meurt affichage de sa mort dans les 10 millisseconde suivant son décés réel
+- IL FAUT eviter que les philo meurent (bien sur), donc bien veiller à ce qu'il ne reste pas trop longtemps sans manger et ainsi survive 
+- Quand peuvent ils mourir ?? 
+
+### PARSER 
+
+- Nbr d'arg < 5 = erreur 
+- Nbr de philo = 1 (pas assez de fork pour qu'il mange, donc au lieu d'utiliser ses mains il va mourir)
+- Pas de nbr negatif, pas de float. int max ? OK ?

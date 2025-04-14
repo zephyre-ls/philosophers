@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/04/14 11:40:19 by lduflot          ###   ########.fr        #
+#    Updated: 2025/04/14 13:14:27 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ NAME = philo
 ###############################
 ##SOURCES
 
-FILES =
+FILES = philo.c
+
 
 OBJS = $(FILES:.c=.o)
 
