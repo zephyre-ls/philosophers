@@ -6,27 +6,40 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/14 14:38:32 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:14:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <limits.h>
 
 //Stucture pour gérer mes philo
-typedef struct s_philo 
+typedef struct s_philo
 {
-	int	id;
+	int			id;
 	pthread_t	thread_id;
 	pthread_t	thread_dead;
+	mutex	nbr_fork;
+	mutex	left_fork;
+	mutex	right_fork;
 }			t_philo;
+
+typedef struct s_rules
+{
+	t_philo	
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nbr_meal;
+}			t_rules;
 
 // Fonctions
 // Parsing
