@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/15 16:14:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:33:22 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,42 @@
 # include <limits.h>
 
 //Stucture pour gérer mes philo
-typedef struct s_philo
-{
-	int			id;
-	pthread_t	thread_id;
-	pthread_t	thread_dead;
-	mutex	nbr_fork;
-	mutex	left_fork;
-	mutex	right_fork;
-}			t_philo;
-
 typedef struct s_rules
 {
-	t_philo	
+	int	nbr_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nbr_meal;
+	pthread_mutex_t *forks;
 }			t_rules;
+
+typedef struct s_philo
+{
+	pthread_t	thread_id;
+	pthread_t	thread_dead;
+	int	left_fork_id;
+	int	right_fork_id;
+	t_rules	*rules;
+}			t_philo;
+
+
 
 // Fonctions
 // Parsing
 int	error_nbr_philo(char *argv);
 int	ft_atoi(char *arg);
 int	only_number(char *argv);
+
+// Time
+int	real_time(void);
+
+//Init thread, rules
+int	init_argv(t_rules *rules, char **argv);
+int	init_mutex(t_rules *rules);
+int	init_philo_fork(t_rules *rules, t_philo *philo);
+int	create_thread(t_philo *philo, t_rules *rules);
+void	*start_routine(void *arg);
 
 #endif
 

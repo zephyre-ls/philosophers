@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/15 15:51:48 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:16:27 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	int	j;
+	t_rules	rules;
 
 	j = 1;
 	if (argc == 5 || argc == 6)
@@ -28,7 +29,9 @@ int	main(int argc, char **argv)
 			}
 			j++;
 		}
-		error_nbr_philo(argv[1]);
+		//error_nbr_philo(argv[1]);
+		init_argv(&rules, argv);
+		printf("Temps actuel (ms) : %d\n", real_time());
 	}
 	else
 	{

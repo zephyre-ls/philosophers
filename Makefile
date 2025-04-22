@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/04/15 15:53:27 by lduflot          ###   ########.fr        #
+#    Updated: 2025/04/22 10:08:00 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ NAME = philo
 
 FILES = philo.c \
 				check_args.c \
-				thread.c
+				thread.c \
+				time.c
 
 
 OBJS = $(FILES:.c=.o)
