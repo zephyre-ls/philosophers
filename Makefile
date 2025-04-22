@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/04/22 10:08:00 by lduflot          ###   ########.fr        #
+#    Updated: 2025/04/22 11:01:08 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ NAME = philo
 ##SOURCES
 
 FILES = philo.c \
-				check_args.c \
-				thread.c \
-				time.c
+				source/philo_utils.c \
+				source/thread.c \
+				source/time.c
 
 
 OBJS = $(FILES:.c=.o)

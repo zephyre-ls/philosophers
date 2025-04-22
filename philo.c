@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 10:16:27 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:59:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@ int	main(int argc, char **argv)
 	{
 		while (argv[j])
 		{
-			if (only_number(argv[j]) || ft_atoi(argv[j]) <= 0)
-			{
-				printf("Erreur: Veuillez entrer un nbr > 0\n");
+			if (only_number(argv[j]))
 				return (1);
-			}
 			j++;
 		}
-		//error_nbr_philo(argv[1]);
 		init_argv(&rules, argv);
 		printf("Temps actuel (ms) : %d\n", real_time());
 	}

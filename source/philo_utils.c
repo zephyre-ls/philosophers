@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:46:42 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/15 15:49:21 by lduflot          ###   ########.fr       */
+/*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
+/*   Updated: 2025/04/22 11:01:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-int	ft_atoi(char *arg)
+int	ft_atoi(char *str)
 {
 	int		i;
 	long	nbr;
 
 	i = 0;
 	nbr = 0;
-	while (arg[i] >= '0' && arg[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		nbr = nbr * 10 + (arg[i] - '0');
+		nbr = nbr * 10 + (str[i] - '0');
 		if (nbr > INT_MAX)
 		{
 			printf("Erreur : Valeure supérieur à INT_MAX repéré\n");
@@ -43,22 +43,10 @@ int	only_number(char *argv)
 			i++;
 		else
 		{
-			printf("Erreur: Veuillez rentrer un nombre valable\n");
+			printf("Erreur: Number Invalid\n");
 			return (1);
 		}
 	}
 	return (0);
 }
 
-int	error_nbr_philo(char *argv)
-{
-	int	nbr_philosophers;
-
-	nbr_philosophers = ft_atoi(argv);
-	if (nbr_philosophers < 2)
-	{
-		printf("Erreur: Minimum deux philosophers requis\n");
-		return (1);
-	}
-	return (0);
-}

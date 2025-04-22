@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 10:33:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 11:02:41 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ typedef struct s_philo
 	t_rules	*rules;
 }			t_philo;
 
-
-
 // Fonctions
 // Parsing
-int	error_nbr_philo(char *argv);
-int	ft_atoi(char *arg);
+int	ft_atoi(char *str);
 int	only_number(char *argv);
 
 // Time
