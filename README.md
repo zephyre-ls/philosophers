@@ -148,3 +148,8 @@ timestamp = temps en miliseconde, et X = n° du philo
 - Nbr d'arg < 5 = erreur 
 - Nbr de philo = 1 (pas assez de fork pour qu'il mange, donc au lieu d'utiliser ses mains il va mourir)
 - Pas de nbr negatif, pas de float. int max ? OK ?
+
+### ERREUR de compilation jamais observé avant : 
+
+*** stack smashing detected ***: terminated
+- Aborted (core dumped) = dépassement ou écrasement de la mémoire de la pile (stack).

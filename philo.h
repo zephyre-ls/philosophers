@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 11:02:41 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:13:15 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_rules
 
 typedef struct s_philo
 {
+	int	id;
 	pthread_t	thread_id;
 	pthread_t	thread_dead;
 	int	left_fork_id;

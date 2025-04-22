@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 10:59:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:12:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	int	j;
 	t_rules	rules;
+	t_philo	*philo;
 
 	j = 1;
 	if (argc == 5 || argc == 6)
@@ -27,6 +28,11 @@ int	main(int argc, char **argv)
 			j++;
 		}
 		init_argv(&rules, argv);
+		philo = malloc(sizeof(t_philo) * rules.nbr_philo);
+		rules.forks = malloc(sizeof(pthread_mutex_t) * rules.nbr_philo);
+		init_mutex(&rules);
+		init_philo_fork(&rules, philo);
+		create_thread(philo, &rules);
 		printf("Temps actuel (ms) : %d\n", real_time());
 	}
 	else

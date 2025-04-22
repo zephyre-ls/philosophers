@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 11:01:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/22 12:12:46 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	init_philo_fork(t_rules *rules, t_philo *philo)
 	i = 0;
 	while(i < rules->nbr_philo)
 	{
+		philo[i].id = i + 1;
 		philo[i].left_fork_id = i;
 		philo[i].right_fork_id = i + 1;
 		i++;
@@ -66,21 +67,30 @@ int	create_thread(t_philo *philo, t_rules *rules)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while(i < rules->nbr_philo)
 	{
-		pthread_create(&philo[i].thread_id, NULL, *start_routine, &philo[i]);
+		pthread_create(&philo[i].thread_id, NULL, start_routine, &philo[i]);
+		i++;
 	}
-	i++;
 	return(0);
 }
 
 void	*start_routine(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
-	printf("N°%ld\n", philo->thread_id);
+	printf("Naissance du philosophe n°%d\n", philo->id);
 	return (0);
 }
+
+/*char	print_state_philo(t_philo *philo)
+{
+	printf(real_time(), "%d has taken a fork 🍴\n", philo->thread_id);
+	printf(real_time(), "%d is eating 🍝\n", philo->thread_id);
+	printf(real_time(), "%d is sleeping 💤\n", philo->thread_id);
+	printf(real_time(), "%d is thinking 🤔\n", philo->thread_id);
+	printf(real_time(), "%d died 💀\n", philo->thread_id);
+}*/
 
 //pthread_t *thread 
 // = pointeur vers une varialbe qui recoit l'id du thread crée 
