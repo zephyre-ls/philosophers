@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 12:12:58 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:09:44 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 		init_mutex(&rules);
 		init_philo_fork(&rules, philo);
 		create_thread(philo, &rules);
-		printf("Temps actuel (ms) : %d\n", real_time());
+	//	printf("Temps actuel (ms) : %d\n", real_time());
 	}
 	else
 	{

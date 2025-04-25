@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 10:05:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:14:59 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,37 @@ void	*start_routine(void *arg)
 
 	while (1)
 	{
-		if ((real_time() - philo->last_meal) > (philo->last_meal > philo->rules->time_to_die))
+		/*if ((real_time() - philo->last_meal) > (philo->last_meal > philo->rules->time_to_die))
 		{
 			pthread_mutex_lock(&philo->rules->death_mutex);
 			printf("%d died 💀\n", philo->id);
 			pthread_mutex_unlock(&philo->rules->death_mutex);
 			break;
+		}*/
+		if (philo->id %2 == 0) //ordre pair pour la prise des forks. evite deadlock
+		{
+			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
+			print_state_philo(philo, "has taken a left.fork 🍴");
+			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
+			print_state_philo(philo, "has taken a right.fork 🍴");
 		}
-		pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
-		print_state_philo(philo, "has taken a fork 🍴");
-		pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
-		print_state_philo(philo, "has taken a fork 🍴");
+		else
+		{
+			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
+			print_state_philo(philo, "has taken a right.fork 🍴");
+			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
+			print_state_philo(philo, "has taken a left.fork 🍴");
+		}
 		print_state_philo(philo, "is eating 🍝");
-		usleep(philo->rules->time_to_eat);
+		usleep(philo->rules->time_to_sleep);
 		pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
 		pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
+		printf("%d a poser les 2 fork\n", philo->id);
+		usleep(1000);
 		print_state_philo(philo,"is sleeping 💤");
 		usleep(philo->rules->time_to_sleep);
 		print_state_philo(philo,"is thinking 🤔");
+		usleep(1000);
 	}
 	return (0);
 }

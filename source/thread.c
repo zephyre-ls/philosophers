@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 10:09:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:27:55 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	init_philo_fork(t_rules *rules, t_philo *philo)
 	{
 		philo[i].id = i + 1;
 		philo[i].left_fork_id = i;
-		philo[i].right_fork_id = i + 1;
+		if (i + 1 < rules->nbr_philo)
+			philo[i].right_fork_id = i + 1;
+		else
+			philo[i].left_fork_id = 0;
 		philo[i].last_meal = real_time();
 		philo[i].rules = rules;
 		i++;
@@ -79,10 +82,6 @@ int	create_thread(t_philo *philo, t_rules *rules)
 	}
 	return(0);
 }
-
-
-
-
 
 //pthread_t *thread 
 // = pointeur vers une varialbe qui recoit l'id du thread crée 
