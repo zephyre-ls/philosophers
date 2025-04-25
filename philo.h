@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 12:13:15 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:08:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef struct s_rules
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nbr_meal;
-	pthread_mutex_t *forks;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	death_mutex;
 }			t_rules;
 
 typedef struct s_philo
@@ -39,6 +41,7 @@ typedef struct s_philo
 	pthread_t	thread_dead;
 	int	left_fork_id;
 	int	right_fork_id;
+	int	last_meal;
 	t_rules	*rules;
 }			t_philo;
 
@@ -56,6 +59,7 @@ int	init_mutex(t_rules *rules);
 int	init_philo_fork(t_rules *rules, t_philo *philo);
 int	create_thread(t_philo *philo, t_rules *rules);
 void	*start_routine(void *arg);
+void	print_state_philo(t_philo *philo, char *txt);
 
 #endif
 

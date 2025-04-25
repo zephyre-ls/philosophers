@@ -6,24 +6,24 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 11:01:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 10:17:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	real_time(void)
+int	real_time()
 {
 	struct timeval	current_time;
 	int							time_seconde;
 	int							time_microseconde;
+	int							time_ms;
 
-	time_seconde = 0;
-	time_microseconde = 0;
 	gettimeofday(&current_time, NULL);
 	time_seconde = current_time.tv_sec * 1000;
 	time_microseconde = current_time.tv_usec / 1000;
-	return (time_seconde + time_microseconde);
+	time_ms = time_seconde + time_microseconde;
+	return (time_ms);
 }
 
 /*

@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/04/22 11:01:08 by lduflot          ###   ########.fr        #
+#    Updated: 2025/04/24 11:17:14 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ##ARGUMENTS/MACRO
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -pthread -Wall -Wextra -Werror
 NAME = philo
 
 ###############################
@@ -24,6 +24,7 @@ NAME = philo
 FILES = philo.c \
 				source/philo_utils.c \
 				source/thread.c \
+				source/task_philo.c \
 				source/time.c
 
 
