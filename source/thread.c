@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 10:27:55 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:16:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	init_argv(t_rules *rules, char **argv)
 	rules->time_to_die = ft_atoi(argv[2]);
 	rules->time_to_eat = ft_atoi(argv[3]);
 	rules->time_to_sleep = ft_atoi(argv[4]);
+	if (rules->nbr_philo < 2 || rules->time_to_die <= 0 || rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
+	{
+		printf("Number invalid\n");
+		return(1);
+	}
 	if (argv[5])
 	{
 		rules->nbr_meal = ft_atoi(argv[5]);
@@ -27,12 +32,7 @@ int	init_argv(t_rules *rules, char **argv)
 			return(1);
 		}
 	}
-	if (rules->nbr_philo < 2 || rules->time_to_die <= 0 || rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
-	{
-		printf("Number invalid\n");
-		return(1);
-	}
-	return(0);
+	return (0);
 }
 
 int	init_mutex(t_rules *rules)
@@ -59,10 +59,17 @@ int	init_philo_fork(t_rules *rules, t_philo *philo)
 	{
 		philo[i].id = i + 1;
 		philo[i].left_fork_id = i;
+		printf("fork num left = %d\n", philo[i].left_fork_id);
 		if (i + 1 < rules->nbr_philo)
+		{
 			philo[i].right_fork_id = i + 1;
+			printf("fork num = %d\n", philo[i].right_fork_id);
+		}
 		else
-			philo[i].left_fork_id = 0;
+		{
+			philo[i].right_fork_id = 0;
+			printf("2fork num = %d\n", philo[i].right_fork_id);
+		}
 		philo[i].last_meal = real_time();
 		philo[i].rules = rules;
 		i++;

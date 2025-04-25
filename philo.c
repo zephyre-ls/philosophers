@@ -6,11 +6,32 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 11:09:44 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:45:08 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_philo(t_philo *philo, t_rules *rules)
+{
+	int	i;
+
+	i = 0;
+	while (i < rules->nbr_philo)
+	{
+		pthread_join(philo[i].thread_id, NULL);
+		i++;
+	}
+	while (i < rules->nbr_philo)
+	{
+		pthread_mutex_destroy(rules->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(rules->print_mutex);
+	pthread_mutex_destroy(rules->death_mutex);
+	free(philo);
+	free(rules->forks);
+}
 
 int	main(int argc, char **argv)
 {
@@ -30,8 +51,8 @@ int	main(int argc, char **argv)
 		init_argv(&rules, argv);
 		philo = malloc(sizeof(t_philo) * rules.nbr_philo);
 		rules.forks = malloc(sizeof(pthread_mutex_t) * rules.nbr_philo);
-		init_mutex(&rules);
 		init_philo_fork(&rules, philo);
+		init_mutex(&rules);
 		create_thread(philo, &rules);
 	//	printf("Temps actuel (ms) : %d\n", real_time());
 	}

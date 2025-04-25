@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/22 11:01:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:06:11 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(char *str)
 		nbr = nbr * 10 + (str[i] - '0');
 		if (nbr > INT_MAX)
 		{
-			printf("Erreur : Valeure supérieur à INT_MAX repéré\n");
+			printf("Erreur : Valeure supérieur à INT_MAX\n");
 			return (1);
 		}
 		i++;
