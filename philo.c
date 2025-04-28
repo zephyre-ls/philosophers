@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 09:13:52 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:23:40 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	free_mutex(t_philo *philo, t_rules *rules)
 
 int	main(int argc, char **argv)
 {
-	int	j;
 	t_rules	rules;
 	t_philo	*philo;
+	int		j;
 
 	j = 1;
 	if (argc == 5 || argc == 6)
@@ -49,10 +49,10 @@ int	main(int argc, char **argv)
 		init_philo_fork(&rules, philo);
 		init_mutex(&rules);
 		init_last_meal(&rules, philo);
+		init_nbr_meal(&rules, philo);
 		create_thread(philo, &rules);
 		wait_threads_philo(philo, &rules);
 		free_mutex(philo, &rules);
-	//	printf("Temps actuel (ms) : %d\n", real_time());
 	}
 	else
 	{

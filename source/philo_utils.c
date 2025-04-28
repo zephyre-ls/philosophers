@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 16:06:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/28 11:05:37 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ int	only_number(char *argv)
 	}
 	return (0);
 }
-
