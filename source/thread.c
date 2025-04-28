@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 16:16:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/28 09:15:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ int	init_argv(t_rules *rules, char **argv)
 		}
 	}
 	return (0);
+}
+
+void	init_last_meal(t_rules *rules, t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+		while (i < rules->nbr_philo)
+	{
+		philo[i].last_meal = 0;
+		i++;
+	}
 }
 
 int	init_mutex(t_rules *rules)
@@ -88,6 +100,18 @@ int	create_thread(t_philo *philo, t_rules *rules)
 		i++;
 	}
 	return(0);
+}
+
+void	wait_threads_philo(t_philo *philo, t_rules *rules)
+{
+	int	i;
+
+	i = 0;
+	while (i < rules->nbr_philo)
+	{
+		pthread_join(philo[i].thread_id, NULL); //mentor qui attend que chaque thread se termine pour passer au suivant. 
+		i++;
+	}
 }
 
 //pthread_t *thread 
