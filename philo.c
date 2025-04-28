@@ -6,29 +6,36 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 16:45:08 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/28 08:26:06 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_philo(t_philo *philo, t_rules *rules)
+void	wait_threads_philo(t_philo *philo, t_rules *rules)
 {
 	int	i;
 
 	i = 0;
 	while (i < rules->nbr_philo)
 	{
-		pthread_join(philo[i].thread_id, NULL);
+		pthread_join(philo[i].thread_id, NULL); //mentor qui attend que chaque thread se termine pour passer au suivant. 
 		i++;
 	}
+}
+
+void	free_mutex(t_philo *philo, t_rules *rules)
+{
+	int	i;
+
+	i = 0;
 	while (i < rules->nbr_philo)
 	{
-		pthread_mutex_destroy(rules->forks[i]);
+		pthread_mutex_destroy(&rules->forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(rules->print_mutex);
-	pthread_mutex_destroy(rules->death_mutex);
+	pthread_mutex_destroy(&rules->print_mutex);
+	pthread_mutex_destroy(&rules->death_mutex);
 	free(philo);
 	free(rules->forks);
 }
@@ -54,6 +61,8 @@ int	main(int argc, char **argv)
 		init_philo_fork(&rules, philo);
 		init_mutex(&rules);
 		create_thread(philo, &rules);
+		wait_threads_philo(philo, &rules);
+		free_mutex(philo, &rules);
 	//	printf("Temps actuel (ms) : %d\n", real_time());
 	}
 	else

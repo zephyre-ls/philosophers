@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/25 11:27:45 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/28 08:25:34 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ int	init_philo_fork(t_rules *rules, t_philo *philo);
 int	create_thread(t_philo *philo, t_rules *rules);
 void	*start_routine(void *arg);
 void	print_state_philo(t_philo *philo, char *txt);
+void	wait_threads_philo(t_philo *philo, t_rules *rules);
+void	free_mutex(t_philo *philo, t_rules *rules);
+
 
 #endif
 
