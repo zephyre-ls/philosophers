@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 12:16:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 14:52:52 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 * leaks quand on interromp le programme; => non corrigeable 
 * parsing ne fonctionne plus et meme si mauvais argument progamm se lance => OK
 * gestion de l'option nbr de repas 
+* mon temps apparait en négatif : POURQUOOOOOOI ?
 */
 
 void	free_mutex(t_philo *philo, t_rules *rules)
@@ -30,6 +31,7 @@ void	free_mutex(t_philo *philo, t_rules *rules)
 	}
 	pthread_mutex_destroy(&rules->print_mutex);
 	pthread_mutex_destroy(&rules->death_mutex);
+	pthread_mutex_destroy(&rules->meal_empty_mutex);
 	free(philo);
 	free(rules->forks);
 }

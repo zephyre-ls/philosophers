@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 12:15:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 14:59:17 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,23 @@ void	*start_routine(void *arg)
 			death_philo(philo);
 			break ;
 		}
+		if (philo->rules->nbr_philo == 1)
+		{
+			philo->last_meal = real_time();
+			while (1)
+			{
+				result = real_time() - philo->last_meal;
+				if (result > philo->rules->time_to_die)
+				{
+					death_philo(philo);
+					break ;
+				}
+				print_state_philo(philo, "is thinking 🤔");
+				print_state_philo(philo, "is sleeping 💤");
+				usleep(philo->rules->time_to_sleep * 1000);
+			}
+			break ;
+		}
 		if (philo->id % 2 == 0)
 		{
 			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
@@ -47,20 +64,25 @@ void	*start_routine(void *arg)
 			print_state_philo(philo, "has taken a left.fork 🍴");
 		}
 		print_state_philo(philo, "is eating 🍝");
-		philo->meals_left++;
+		if (philo->meals_left == philo->rules->nbr_meal)
+		{
+			meal_empty(philo);
+			break;
+		}
+		else 
+			philo->meals_left++;
 		printf("id : %d meals : %d\n", philo->id, philo->meals_left);
-		//faire une fonction qui if meals_left == nbr_meal break !
 		usleep(philo->rules->time_to_eat * 1000);
 		philo->last_meal = real_time();
 		//printf("%d last_meal %d : \n", philo->id, philo->last_meal);
 		pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
 		pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
-		print_state_philo(philo, "a poser les 2 fork\n");
+		//print_state_philo(philo, "a poser les 2 fork\n");
+		print_state_philo(philo, "is thinking 🤔");
 		print_state_philo(philo, "is sleeping 💤");
 		usleep(philo->rules->time_to_sleep * 1000);
-		print_state_philo(philo, "is thinking 🤔");
 		result = real_time() - philo->last_meal;
-		printf("result = %d\n", result);
+		//printf("result = %d\n", result);
 		if (result > philo->rules->time_to_die)
 		{
 			death_philo(philo);
@@ -73,6 +95,6 @@ void	*start_routine(void *arg)
 void	print_state_philo(t_philo *philo, char *txt)
 {
 	pthread_mutex_lock(&philo->rules->print_mutex);
-	printf("%d %d %s\n", real_time(), philo->id, txt);
+	printf("%lld %d %s\n", real_time(), philo->id, txt);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
 }

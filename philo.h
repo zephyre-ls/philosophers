@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 12:13:06 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 14:55:13 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_rules
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	meal_empty_mutex;
 	int				nbr_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -51,7 +52,7 @@ int		ft_atoi(char *str);
 int		only_number(char *argv);
 int		parsing_args(int argc, char **argv);
 // Time
-int		real_time(void);
+long long		real_time(void);
 // Init thread, rules
 int		init_argv(t_rules *rules, char **argv);
 int		init_philo_fork(t_rules *rules, t_philo *philo);
@@ -61,10 +62,11 @@ int		create_thread(t_philo *philo, t_rules *rules);
 void	*start_routine(void *arg);
 void	print_state_philo(t_philo *philo, char *txt);
 void	wait_threads_philo(t_philo *philo, t_rules *rules);
-void	death_philo(t_philo *philo);
 // Mutex
 int		init_mutex(t_rules *rules);
 void	free_mutex(t_philo *philo, t_rules *rules);
+void	death_philo(t_philo *philo);
+void	meal_empty(t_philo *philo);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:22:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 14:29:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
  * gettimeofday 	int gettimeofday(struct timeval *tv, struct timezone *tz);
 */
 
-int	real_time(void)
+long long	real_time(void)
 {
 	struct timeval	current_time;
-	int				time_seconde;
-	int				time_microseconde;
-	int				time_ms;
+	long long				time_seconde;
+	long long				time_microseconde;
+	long long				time_ms;
 
 	gettimeofday(&current_time, NULL);
 	time_seconde = current_time.tv_sec * 1000;
