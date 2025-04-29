@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:16:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:14:15 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	wait_threads_philo(t_philo *philo, t_rules *rules)
 	i = 0;
 	while (i < rules->nbr_philo)
 	{
-		pthread_join(philo[i].thread_id, NULL); //mentor qui attend que chaque thread se termine pour passer au suivant. 
+		pthread_join(philo[i].thread_id, NULL); //mentor qui attend que chaque thread 
+		//se termine pour passer au suivant. 
 		i++;
 	}
 }

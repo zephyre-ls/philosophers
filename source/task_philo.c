@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:11:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:15:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	*start_routine(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		result = real_time() - philo->last_meal;
+		if (result > philo->rules->time_to_die)
+		{
+			death_philo(philo);
+			break ;
+		}
 		if (philo->id % 2 == 0)
 		{
 			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
@@ -42,6 +48,7 @@ void	*start_routine(void *arg)
 		}
 		print_state_philo(philo, "is eating 🍝");
 		philo->meals_left++;
+		printf("id : %d meals : %d\n", philo->id, philo->meals_left);
 		//faire une fonction qui if meals_left == nbr_meal break !
 		usleep(philo->rules->time_to_eat * 1000);
 		philo->last_meal = real_time();

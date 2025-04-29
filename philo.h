@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:27:56 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:13:06 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <pthread.h>
 # include <limits.h>
 
-//Stucture pour gérer mes philo
 typedef struct s_rules
 {
 	pthread_mutex_t	*forks;
@@ -50,11 +49,11 @@ typedef struct s_philo
 // Parsing
 int		ft_atoi(char *str);
 int		only_number(char *argv);
+int		parsing_args(int argc, char **argv);
 // Time
 int		real_time(void);
-//Init thread, rules
+// Init thread, rules
 int		init_argv(t_rules *rules, char **argv);
-int		init_mutex(t_rules *rules);
 int		init_philo_fork(t_rules *rules, t_philo *philo);
 void	init_last_meal(t_rules *rules, t_philo *philo);
 void	init_nbr_meal(t_rules *rules, t_philo *philo);
@@ -62,8 +61,10 @@ int		create_thread(t_philo *philo, t_rules *rules);
 void	*start_routine(void *arg);
 void	print_state_philo(t_philo *philo, char *txt);
 void	wait_threads_philo(t_philo *philo, t_rules *rules);
-void	free_mutex(t_philo *philo, t_rules *rules);
 void	death_philo(t_philo *philo);
+// Mutex
+int		init_mutex(t_rules *rules);
+void	free_mutex(t_philo *philo, t_rules *rules);
 
 #endif
 
@@ -80,11 +81,4 @@ void	death_philo(t_philo *philo);
  *	pthread_mutex_lock
  *	pthread_mutex_unlock
  *	pthread_mutex_destroy
- *
- * Arguments :
- * number_of_philosophers
- * time_to_die
- * time_to_eat
- * time_to_sleep
- * [number_of_times_each_philosopher_must_eat]
  */

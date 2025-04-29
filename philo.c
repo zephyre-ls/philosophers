@@ -6,11 +6,17 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:23:40 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:16:36 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/* A  gerer:
+* leaks quand on interromp le programme; => non corrigeable 
+* parsing ne fonctionne plus et meme si mauvais argument progamm se lance => OK
+* gestion de l'option nbr de repas 
+*/
 
 void	free_mutex(t_philo *philo, t_rules *rules)
 {
@@ -32,33 +38,25 @@ int	main(int argc, char **argv)
 {
 	t_rules	rules;
 	t_philo	*philo;
-	int		j;
 
-	j = 1;
-	if (argc == 5 || argc == 6)
+	if (parsing_args(argc, argv))
+		return (1);
+	init_argv(&rules, argv);
+	philo = malloc(sizeof(t_philo) * rules.nbr_philo);
+	if (!philo)
+		return (1);
+	rules.forks = malloc(sizeof(pthread_mutex_t) * rules.nbr_philo);
+	if (!rules.forks)
 	{
-		while (argv[j])
-		{
-			if (only_number(argv[j]))
-				return (1);
-			j++;
-		}
-		init_argv(&rules, argv);
-		philo = malloc(sizeof(t_philo) * rules.nbr_philo);
-		rules.forks = malloc(sizeof(pthread_mutex_t) * rules.nbr_philo);
-		init_philo_fork(&rules, philo);
-		init_mutex(&rules);
-		init_last_meal(&rules, philo);
-		init_nbr_meal(&rules, philo);
-		create_thread(philo, &rules);
-		wait_threads_philo(philo, &rules);
-		free_mutex(philo, &rules);
-	}
-	else
-	{
-		printf("./philo nbr_philo, time_to_die, time_to_eat, time_to_sleep, \
-		number_of_times_each_philosopher_must_eat (time en millieconde)\n");
+		free(philo);
 		return (1);
 	}
+	init_philo_fork(&rules, philo);
+	init_mutex(&rules);
+	init_last_meal(&rules, philo);
+	init_nbr_meal(&rules, philo);
+	create_thread(philo, &rules);
+	wait_threads_philo(philo, &rules);
+	free_mutex(philo, &rules);
 	return (0);
 }

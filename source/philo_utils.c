@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:05:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 12:01:52 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,29 @@ int	only_number(char *argv)
 			printf("Erreur: Number Invalid\n");
 			return (1);
 		}
+	}
+	return (0);
+}
+
+int	parsing_args(int argc, char **argv)
+{
+	int	i;
+
+	if (argc != 5 && argc != 6)
+	{
+		printf("./philo number_philo, time_to_die, time_to_eat, time_to_sleep, \
+		optionnal: number_of_meal)");
+		return (1);
+	}
+	i = 1;
+	while (i < argc)
+	{
+		if (only_number(argv[i]) || ft_atoi(argv[i]) <= 0)
+		{
+			printf("Erreur: Argument invalid\n");
+			return (1);
+		}
+		i++;
 	}
 	return (0);
 }

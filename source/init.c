@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/28 11:16:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/29 08:53:11 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,16 @@ int	init_philo_fork(t_rules *rules, t_philo *philo)
 	{
 		philo[i].id = i + 1;
 		philo[i].left_fork_id = i;
-		printf("fork num left = %d\n", philo[i].left_fork_id);
+	//	printf("fork num left = %d\n", philo[i].left_fork_id);
 		if (i + 1 < rules->nbr_philo)
 		{
 			philo[i].right_fork_id = i + 1;
-			printf("fork num = %d\n", philo[i].right_fork_id);
+		//	printf("fork num = %d\n", philo[i].right_fork_id);
 		}
 		else
 		{
 			philo[i].right_fork_id = 0;
-			printf("2fork num = %d\n", philo[i].right_fork_id);
+		//	printf("2fork num = %d\n", philo[i].right_fork_id);
 		}
 		philo[i].last_meal = real_time();
 		philo[i].rules = rules;
