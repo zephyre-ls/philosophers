@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 14:55:13 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/30 11:36:06 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,45 @@ typedef struct s_rules
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_meal;
-}			t_rules;
+}	t_rules;
 
 typedef struct s_philo
 {
 	pthread_t	thread_id;
 	pthread_t	thread_dead;
+	long long	last_meal;
 	int			id;
 	int			left_fork_id;
 	int			right_fork_id;
-	int			last_meal;
 	int			meals_left;
 	t_rules		*rules;
 }			t_philo;
 
 // Fonctions
-// Parsing
-int		ft_atoi(char *str);
-int		only_number(char *argv);
-int		parsing_args(int argc, char **argv);
+
 // Time
-long long		real_time(void);
+long long	real_time(void);
+
+// Parsing
+int			ft_atoi(char *str);
+int			only_number(char *argv);
+int			parsing_args(int argc, char **argv);
+
 // Init thread, rules
-int		init_argv(t_rules *rules, char **argv);
-int		init_philo_fork(t_rules *rules, t_philo *philo);
-void	init_last_meal(t_rules *rules, t_philo *philo);
-void	init_nbr_meal(t_rules *rules, t_philo *philo);
-int		create_thread(t_philo *philo, t_rules *rules);
-void	*start_routine(void *arg);
-void	print_state_philo(t_philo *philo, char *txt);
-void	wait_threads_philo(t_philo *philo, t_rules *rules);
+int			init_argv(t_rules *rules, char **argv);
+int			init_philo_fork(t_rules *rules, t_philo *philo);
+void		init_last_meal(t_rules *rules, t_philo *philo);
+void		init_nbr_meal(t_rules *rules, t_philo *philo);
+int			create_thread(t_philo *philo, t_rules *rules);
+void		*start_routine(void *arg);
+void		print_state_philo(t_philo *philo, char *txt);
+void		wait_threads_philo(t_philo *philo, t_rules *rules);
+
 // Mutex
-int		init_mutex(t_rules *rules);
-void	free_mutex(t_philo *philo, t_rules *rules);
-void	death_philo(t_philo *philo);
-void	meal_empty(t_philo *philo);
+int			init_mutex(t_rules *rules);
+void		free_mutex(t_philo *philo, t_rules *rules);
+void		death_philo(t_philo *philo);
+void		meal_empty(t_philo *philo);
 
 #endif
 

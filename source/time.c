@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 14:29:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/04/30 11:36:26 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 long long	real_time(void)
 {
 	struct timeval	current_time;
-	long long				time_seconde;
-	long long				time_microseconde;
-	long long				time_ms;
+	long long		time_seconde;
+	long long		time_microseconde;
+	long long		time_ms;
 
 	gettimeofday(&current_time, NULL);
 	time_seconde = current_time.tv_sec * 1000;
