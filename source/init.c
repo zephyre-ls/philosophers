@@ -6,11 +6,12 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 14:52:27 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 20:10:04 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
 
 int	init_argv(t_rules *rules, char **argv)
 {
@@ -33,10 +34,12 @@ int	init_argv(t_rules *rules, char **argv)
 			return (1);
 		}
 	}
+	else
+		rules->nbr_meal = 'NULL';
 	return (0);
 }
 
-void	init_nbr_meal(t_rules *rules, t_philo *philo)
+void	init_meal(t_rules *rules, t_philo *philo)
 {
 	int	i;
 
@@ -44,17 +47,6 @@ void	init_nbr_meal(t_rules *rules, t_philo *philo)
 	while (i < rules->nbr_philo)
 	{
 		philo[i].meals_left = 0;
-		i++;
-	}
-}
-
-void	init_last_meal(t_rules *rules, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < rules->nbr_philo)
-	{
 		philo[i].last_meal = 0;
 		i++;
 	}

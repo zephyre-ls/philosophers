@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/04/30 11:08:02 by lduflot          ###   ########.fr        #
+#    Updated: 2025/05/01 15:35:42 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES = philo.c \
 				source/philo_utils.c \
 				source/thread.c \
 				source/task_philo.c \
+				source/task_philo2.c \
 				source/death.c \
 				source/init.c \
 				source/time.c

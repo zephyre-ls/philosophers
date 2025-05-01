@@ -6,14 +6,13 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/30 11:36:26 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 19:31:56 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 /*
- * Heure actuelle de la machine en milliseconde.
  * struct timeval{
  * time_t	tv_sec; //secondes
  * suseconds_t	tv_usec//microsecondes }

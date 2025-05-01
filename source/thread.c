@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/30 11:38:52 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 16:32:00 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 	* const pthread_attr_t *attr = pointeur vers struct du thread (NULL)
 	* *(start_routine)(void *) = fct que le thread va effectué
 	* void *arg = arg a passé a la fonction
-	*
 	*/
+
 int	create_thread(t_philo *philo, t_rules *rules)
 {
 	int	i;

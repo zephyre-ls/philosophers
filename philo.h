@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/30 23:34:15 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 18:51:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ int			parsing_args(int argc, char **argv);
 // Init thread, rules
 int			init_argv(t_rules *rules, char **argv);
 int			init_philo_fork(t_rules *rules, t_philo *philo);
-void		init_last_meal(t_rules *rules, t_philo *philo);
-void		init_nbr_meal(t_rules *rules, t_philo *philo);
+void		init_meal(t_rules *rules, t_philo *philo);
 int			create_thread(t_philo *philo, t_rules *rules);
 void		*start_routine(void *arg);
 void		print_state_philo(t_philo *philo, char *txt);
 void		wait_threads_philo(t_philo *philo, t_rules *rules);
 void		only_philo(t_philo *philo);
+void		philo_take_fork(t_philo *philo);
+int			count_meal(t_philo *philo);
+void		unlock_thread(t_philo *philo);
+void		philo_think_and_go_sleep(t_philo *philo);
 
 // Mutex
 int			init_mutex(t_rules *rules);

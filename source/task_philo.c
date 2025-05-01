@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/30 23:51:02 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 20:11:57 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,19 @@
 
 void	only_philo(t_philo *philo)
 {
-	int	result;
-
-	while (1)
+	philo->last_meal = real_time();
+	if (philo->rules->nbr_philo == 1)
 	{
-		result = real_time() - philo->last_meal;
-		if (result > philo->rules->time_to_die)
+		while (1)
 		{
-			death_philo(philo);
-			break ;
+			if (death_or_not_death(philo) == 1)
+				break ;
+			print_state_philo(philo, "is thinking 💭");
+			print_state_philo(philo, "is sleeping 💤");
+			usleep(philo->rules->time_to_sleep * 1000);
 		}
-		print_state_philo(philo, "is thinking 💭");
-		print_state_philo(philo, "is sleeping 💤");
-		usleep(philo->rules->time_to_sleep * 1000);
 	}
 }
-
-int	death_or_not_death(t_philo *philo)
-{
-	int	result;
-
-	result = real_time() - philo->last_meal;
-	if (result > philo->rules->time_to_die)
-	{
-		death_philo(philo);
-		return (1);
-	}
-	return (0);
-}
-
 
 void	*start_routine(void *arg)
 {
@@ -61,57 +45,56 @@ void	*start_routine(void *arg)
 			break ;
 		if (philo->rules->nbr_philo == 1)
 		{
-			philo->last_meal = real_time();
 			only_philo(philo);
 			break ;
 		}
-		if (death_or_not_death(philo) == 1)
-			break ;
+		//printf("philo n*%d - dernier repas: %lld \n", philo->id, philo->last_meal);
 		if (philo->id % 2 == 0)
 		{
-			if (death_or_not_death(philo) == 1)
-				break ;
 			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
+			print_state_philo(philo, "has taken a fork ψ");
 			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
 			print_state_philo(philo, "has taken a fork ψ");
 		}
 		else
 		{
-			if (death_or_not_death(philo) == 1)
-				break ;
 			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
+			print_state_philo(philo, "has taken a fork ψ");
 			pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
 			print_state_philo(philo, "has taken a fork ψ");
 		}
+		if (death_or_not_death(philo) == 1)
+		{
+			unlock_thread(philo);
+			break ;
+		}
+		philo->last_meal = real_time();
 		print_state_philo(philo, "is eating 🍝");
-		if (philo->meals_left < philo->rules->nbr_meal)
-			philo->meals_left++;
+		//philo->last_meal = real_time();
+		usleep(philo->rules->time_to_eat * 1000);
+		//philo->last_meal = real_time();
+		if (death_or_not_death(philo) == 1)
+		{
+			unlock_thread(philo);
+			break ;
+		}
+	//	printf("philo n*%d - fini le repas: %lld \n", philo->id, philo->last_meal);
+//		philo_take_fork(philo);
 		if (death_or_not_death(philo) == 1)
 		{
 			death_philo(philo);
-			pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
-			pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
+			unlock_thread(philo);
 			break ;
 		}
-		//printf("id : %d meals : %d\n", philo->id, philo->meals_left);
-		if (philo->meals_left == philo->rules->nbr_meal)
+		count_meal(philo);
+		if (count_meal(philo) == 1)
 		{
 			meal_empty(philo);
-			pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
-			pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
+			unlock_thread(philo);
 			break ;
 		}
-		usleep(philo->rules->time_to_eat * 1000);
-		philo->last_meal = real_time();
-		pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
-		pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
-		if (death_or_not_death(philo) == 1)
-			break ;
-		print_state_philo(philo, "is thinking  💭");
-		if (death_or_not_death(philo) == 1)
-			break ;
-		print_state_philo(philo, "is sleeping 💤");
-		usleep(philo->rules->time_to_sleep * 1000);
+		unlock_thread(philo);
+		philo_think_and_go_sleep(philo);
 		if (death_or_not_death(philo) == 1)
 			break ;
 	}
