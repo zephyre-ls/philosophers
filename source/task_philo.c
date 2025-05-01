@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/01 20:11:57 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/01 21:18:53 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ void	only_philo(t_philo *philo)
 		while (1)
 		{
 			if (death_or_not_death(philo) == 1)
+			{
+				unlock_thread(philo);
 				break ;
+			}
+			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
+			print_state_philo(philo, "has taken a fork ψ");
 			print_state_philo(philo, "is thinking 💭");
 			print_state_philo(philo, "is sleeping 💤");
 			usleep(philo->rules->time_to_sleep * 1000);
