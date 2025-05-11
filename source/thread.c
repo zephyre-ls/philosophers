@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/01 16:32:00 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/11 13:16:29 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	create_thread(t_philo *philo, t_rules *rules)
 		pthread_create(&philo[i].thread_id, NULL, start_routine, &philo[i]);
 		i++;
 	}
+	pthread_create(&rules->monitor_death_thread, NULL, start_monitoring, rules);
 	return (0);
 }
 
@@ -43,4 +44,5 @@ void	wait_threads_philo(t_philo *philo, t_rules *rules)
 		pthread_join(philo[i].thread_id, NULL);
 		i++;
 	}
+	pthread_join(rules->monitor_death_thread, NULL);
 }

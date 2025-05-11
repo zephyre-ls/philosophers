@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/01 18:51:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/11 19:27:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,25 @@
 # include <pthread.h>
 # include <limits.h>
 
+typedef struct	s_philo t_philo;
+
 typedef struct s_rules
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	meal_empty_mutex;
+	pthread_mutex_t	end_simulation_mutex;
+	pthread_mutex_t	last_meal_mutex;
+	pthread_t				monitor_death_thread;
+	long			start_time;
+	int				is_dead_end_simulation;
 	int				nbr_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_meal;
+	t_philo		*philo;
 }	t_rules;
 
 typedef struct s_philo
@@ -62,14 +70,15 @@ int			init_philo_fork(t_rules *rules, t_philo *philo);
 void		init_meal(t_rules *rules, t_philo *philo);
 int			create_thread(t_philo *philo, t_rules *rules);
 void		*start_routine(void *arg);
+void		*start_monitoring(void *arg);
 void		print_state_philo(t_philo *philo, char *txt);
 void		wait_threads_philo(t_philo *philo, t_rules *rules);
 void		only_philo(t_philo *philo);
-void		philo_take_fork(t_philo *philo);
+void		take_forks(t_philo *philo);
 int			count_meal(t_philo *philo);
 void		unlock_thread(t_philo *philo);
-void		philo_think_and_go_sleep(t_philo *philo);
-
+int			day_start(t_philo *philo);
+int			end_simulation(t_philo *philo);
 // Mutex
 int			init_mutex(t_rules *rules);
 void		free_mutex(t_philo *philo, t_rules *rules);
@@ -78,18 +87,3 @@ int			death_or_not_death(t_philo *philo);
 void		meal_empty(t_philo *philo);
 
 #endif
-
-/*
- *	Memset
- *	Printf, write
- *	Malloc, free
- *	Usleep
- *	gettimeofday
- *	pthread_create
- *	pthread_detach
- *	pthread_join
- *	pthread_mutex_init
- *	pthread_mutex_lock
- *	pthread_mutex_unlock
- *	pthread_mutex_destroy
- */

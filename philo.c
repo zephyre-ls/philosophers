@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/01 15:55:30 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:54:40 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_mutex(t_philo *philo, t_rules *rules)
 	pthread_mutex_destroy(&rules->print_mutex);
 	pthread_mutex_destroy(&rules->death_mutex);
 	pthread_mutex_destroy(&rules->meal_empty_mutex);
+	pthread_mutex_destroy(&rules->last_meal_mutex);
 	free(philo);
 	free(rules->forks);
 }
@@ -56,6 +57,7 @@ int	main(int argc, char **argv)
 	init_philo_fork(&rules, philo);
 	init_mutex(&rules);
 	init_meal(&rules, philo);
+	rules.philo = philo;
 	create_thread(philo, &rules);
 	wait_threads_philo(philo, &rules);
 	free_mutex(philo, &rules);
