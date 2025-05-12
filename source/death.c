@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:29:37 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/11 19:46:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 02:01:50 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,16 @@ int	death_or_not_death(t_philo *philo)
 {
 	int	result;
 
-//	if (count_meal(philo))
-	//	return(0); 
-	//	Add condition quand un philosophe est rasasié ne pas verifier sa mort
-
+	if (philo->meals_left == philo->rules->nbr_meal)
+		return (0);
 	pthread_mutex_lock(&philo->rules->last_meal_mutex);
 	result = real_time() - philo->last_meal;
 	pthread_mutex_unlock(&philo->rules->last_meal_mutex);
 	if (result >= philo->rules->time_to_die)
 	{
 		death_philo(philo);
-		//pthread_mutex_lock(&philo->rules->end_simulation_mutex);
 		if (philo->rules->is_dead_end_simulation == 0)
 			philo->rules->is_dead_end_simulation = 1;
-		//pthread_mutex_unlock(&philo->rules->end_simulation_mutex);
 		return (1);
 	}
 	return (0);

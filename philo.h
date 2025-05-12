@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/11 19:27:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 02:08:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <pthread.h>
 # include <limits.h>
 
-typedef struct	s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef struct s_rules
 {
@@ -31,7 +31,7 @@ typedef struct s_rules
 	pthread_mutex_t	meal_empty_mutex;
 	pthread_mutex_t	end_simulation_mutex;
 	pthread_mutex_t	last_meal_mutex;
-	pthread_t				monitor_death_thread;
+	pthread_t		monitor_death_thread;
 	long			start_time;
 	int				is_dead_end_simulation;
 	int				nbr_philo;
@@ -39,7 +39,8 @@ typedef struct s_rules
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_meal;
-	t_philo		*philo;
+	int				philo_finish;
+	t_philo			*philo;
 }	t_rules;
 
 typedef struct s_philo

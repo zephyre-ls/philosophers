@@ -6,12 +6,11 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/11 15:57:33 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 02:08:10 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
 
 int	init_argv(t_rules *rules, char **argv)
 {
@@ -29,15 +28,13 @@ int	init_argv(t_rules *rules, char **argv)
 	if (argv[5])
 	{
 		rules->nbr_meal = ft_atoi(argv[5]);
-		if (rules->nbr_meal <= 0)
-		{
-			printf("Erreur : Number invalid\n");
-			return (1);
-		}
+		rules->philo_finish = 0;
 	}
 	else
+	{
 		rules->nbr_meal = -1;
-	;
+		rules->philo_finish = -1;
+	}
 	return (0);
 }
 

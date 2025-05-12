@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/11 19:38:20 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 02:21:54 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * Evite le dead_lock !
  *
  */
-
 void	only_philo(t_philo *philo)
 {
 	philo->last_meal = real_time();
@@ -25,52 +24,34 @@ void	only_philo(t_philo *philo)
 	{
 		while (1)
 		{
-			if (death_or_not_death(philo))
-			{
-				unlock_thread(philo);
-				break ;
-			}
 			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
 			print_state_philo(philo, "has taken a fork ψ");
 			print_state_philo(philo, "is thinking 💭");
-			if (death_or_not_death(philo))
-			{
-				unlock_thread(philo);
-				break;
-			}
 			print_state_philo(philo, "is sleeping 💤");
-			if (death_or_not_death(philo))
-			{
-				unlock_thread(philo);
-				break;
-			}
 			usleep(philo->rules->time_to_sleep * 1000);
 			unlock_thread(philo);
-			if (death_or_not_death(philo))
-			{
-				unlock_thread(philo);
-				break ;
-			}
 		}
 	}
 }
 
 void	*start_monitoring(void *arg)
 {
-	t_rules	*rules = (t_rules *)arg;
-	int	i;
+	t_rules	*rules;
+	int		i;
 
-	while(!end_simulation(rules->philo))
+	rules = (t_rules *)arg;
+	while (!end_simulation(rules->philo))
 	{
 		i = 0;
 		while (i < rules->nbr_philo)
 		{
-			if (death_or_not_death(&rules->philo[i]))
+			if (death_or_not_death(&rules->philo[i])
+				|| rules->philo_finish == rules->nbr_philo)
 			{
 				pthread_mutex_lock(&rules->end_simulation_mutex);
 				rules->is_dead_end_simulation = 1;
 				pthread_mutex_unlock(&rules->end_simulation_mutex);
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -81,7 +62,7 @@ void	*start_monitoring(void *arg)
 
 void	*start_routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (philo->rules->nbr_philo == 1)
@@ -91,7 +72,7 @@ void	*start_routine(void *arg)
 		if (day_start(philo))
 		{
 			unlock_thread(philo);
-			break;
+			break ;
 		}
 	}
 	return (NULL);
@@ -133,18 +114,4 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
 		print_state_philo(philo, "has taken a fork left ψ");
 	}
-}
-
-void	print_state_philo(t_philo *philo, char *txt)
-{
-	long	current;
-	long	time;
-
-	if (end_simulation(philo))
-		return ;
-	current = real_time();
-	time = current - philo->rules->start_time;
-	pthread_mutex_lock(&philo->rules->print_mutex);
-	printf("⏲︎ %ld %d %s\n", time, philo->id, txt);
-	pthread_mutex_unlock(&philo->rules->print_mutex);
 }
