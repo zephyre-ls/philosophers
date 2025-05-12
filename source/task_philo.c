@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 02:21:54 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 11:48:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,15 @@
  */
 void	only_philo(t_philo *philo)
 {
-	philo->last_meal = real_time();
-	if (philo->rules->nbr_philo == 1)
-	{
-		while (1)
-		{
-			pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
-			print_state_philo(philo, "has taken a fork ψ");
-			print_state_philo(philo, "is thinking 💭");
-			print_state_philo(philo, "is sleeping 💤");
-			usleep(philo->rules->time_to_sleep * 1000);
-			unlock_thread(philo);
-		}
-	}
+	pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
+	print_state_philo(philo, "has taken a fork ψ");
+	print_state_philo(philo, "is thinking 💭");
+	usleep(philo->rules->time_to_die * 1000);
+	print_state_philo(philo, "is died 💀");
+	pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
+	pthread_mutex_lock(&philo->rules->end_simulation_mutex);
+	philo->rules->is_dead_end_simulation = 1;
+	pthread_mutex_unlock(&philo->rules->end_simulation_mutex);
 }
 
 void	*start_monitoring(void *arg)
@@ -74,6 +70,7 @@ void	*start_routine(void *arg)
 			unlock_thread(philo);
 			break ;
 		}
+		unlock_thread(philo);
 	}
 	return (NULL);
 }

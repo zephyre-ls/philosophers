@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
-/*   Updated: 2025/04/29 12:01:52 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 11:43:20 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parsing_args(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 	{
 		printf("./philo number_philo, time_to_die, time_to_eat, time_to_sleep, \
-		optionnal: number_of_meal)");
+		optionnal: number_of_meal\n");
 		return (1);
 	}
 	i = 1;
