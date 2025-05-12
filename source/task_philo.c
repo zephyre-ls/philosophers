@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 11:48:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/05/12 12:12:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	*start_routine(void *arg)
 			unlock_thread(philo);
 			break ;
 		}
-		unlock_thread(philo);
 	}
 	return (NULL);
 }

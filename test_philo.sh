@@ -83,10 +83,17 @@ echo -e "${GREEN}./philo 4 800f 200 200 7${RESET}"
 echo
 
 echo
-echo -e "${YELLOW}Test: all arguments 1ms${RESET}"
-echo -e "${GREEN}./philo 4 1 1 1${RESET}"
+echo -e "${YELLOW}Test: all arguments 10ms${RESET}"
+echo -e "${GREEN}./philo 4 10 10 10${RESET}"
+./philo 4 10 10 1
+echo
+
+echo
+echo -e "${YELLOW}Test: all arguments 10ms${RESET}"
+echo -e "${GREEN}./philo 4 10 10 10${RESET}"
 ./philo 4 1 1 1
 echo
+
 
 echo
 echo -e "${YELLOW}Test: death short${RESET}"
@@ -111,7 +118,12 @@ echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
 ./philo 5 800 200 200 4
 echo
 
+echo -e "${YELLOW}Test: die or finish the meal ?${RESET}"
+echo -e "${GREEN}./philo 4 310 200 100 1${RESET}"
+./philo 4 310 200 100
+echo
+
 echo -e "${YELLOW}Test: die${RESET}"
-echo -e "${GREEN}./philo 4 410 200 100${RESET}"
+echo -e "${GREEN}./philo 4 310 200 100${RESET}"
 ./philo 4 310 200 100
 echo
