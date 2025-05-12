@@ -2,6 +2,9 @@
 
 #!bin/zsh
 ##Possibilite de l'exe avec zhs egalement, le code étant compatible
+#Run =
+# make project
+# ./test_philo.sh
 
 # couleurs
 YELLOW='\033[0;33m'
