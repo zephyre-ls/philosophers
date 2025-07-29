@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:29:37 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:38:54 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 23:26:13 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	death_or_not_death(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->last_meal_mutex);
 	result = real_time() - philo->last_meal;
 	pthread_mutex_unlock(&philo->rules->last_meal_mutex);
-	if (result > philo->rules->time_to_die + 2)
+	if (result > philo->rules->time_to_die + 1)
 	{
 		death_philo(philo);
 		if (philo->rules->is_dead_end_simulation == 0)

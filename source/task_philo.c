@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:41:21 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 23:28:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*start_monitoring(void *arg)
 			}
 			i++;
 		}
-		usleep(2000);
+		usleep(1000);
 	}
 	return (NULL);
 }
