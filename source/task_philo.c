@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 12:12:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:38:54 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void	take_forks(t_philo *philo)
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
-		print_state_philo(philo, "has taken a fork right ψ");
 		pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
+		print_state_philo(philo, "has taken a fork right ψ");
+		pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
 		print_state_philo(philo, "has taken a fork left ψ");
 	}
 }
