@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 02:08:58 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 20:23:03 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_rules
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	meal_empty_mutex;
 	pthread_mutex_t	end_simulation_mutex;
 	pthread_mutex_t	last_meal_mutex;

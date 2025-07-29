@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 19:41:40 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 20:23:26 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	init_mutex(t_rules *rules)
 	pthread_mutex_init(&rules->meal_empty_mutex, NULL);
 	pthread_mutex_init(&rules->end_simulation_mutex, NULL);
 	pthread_mutex_init(&rules->last_meal_mutex, NULL);
+	pthread_mutex_init(&rules->meal_mutex, NULL);
 	return (0);
 }
 

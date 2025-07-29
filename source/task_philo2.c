@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:36:13 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:19:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 20:25:25 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ void	unlock_thread(t_philo *philo)
 
 int	count_meal(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->rules->meal_mutex);
 	if (philo->meals_left < philo->rules->nbr_meal)
 		philo->meals_left++;
 	if (philo->meals_left == philo->rules->nbr_meal)
 	{
 		philo->rules->philo_finish++;
+		pthread_mutex_unlock(&philo->rules->meal_mutex);
 		return (1);
 	}
+	pthread_mutex_unlock(&philo->rules->meal_mutex);
 	return (0);
 }
 
