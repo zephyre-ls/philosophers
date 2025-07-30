@@ -16,7 +16,7 @@ RESET='\033[0m' ##reviens à la color de base
 # Séquences d'échappement = caractere spéciaux précédés d'un \
 # Dans le cas du script : les couleurs \033
 
-#NO VALGRIND :
+echo "Test error arg"
 
 echo
 echo -e "${YELLOW}Test: no arguments${RESET}"
@@ -28,6 +28,12 @@ echo
 echo -e "${YELLOW}Test: miss arguments${RESET}"
 echo -e "${GREEN}./philo 4 800 200${RESET}"
 ./philo 4 800 200
+echo
+
+echo
+echo -e "${YELLOW}Test: intmax${RESET}"
+echo -e "${GREEN}./philo 4 800 2000000000000 100${RESET}"
+./philo 4 800 200000000000000000 100
 echo
 
 echo
@@ -84,6 +90,8 @@ echo -e "${GREEN}./philo 4 800f 200 200 7${RESET}"
 ./philo 4 800f 200 200 7
 echo
 
+echo "Test little rules"
+
 echo
 echo -e "${YELLOW}Test: all arguments 10ms${RESET}"
 echo -e "${GREEN}./philo 4 10 10 10${RESET}"
@@ -96,6 +104,7 @@ echo -e "${GREEN}./philo 4 10 10 10${RESET}"
 ./philo 4 1 1 1
 echo
 
+echo "Test die"
 
 echo
 echo -e "${YELLOW}Test: death short${RESET}"
@@ -109,24 +118,34 @@ echo -e "${GREEN}./philo 1 200 100 100${RESET}"
 ./philo 1 200 100 100
 echo
 
-echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
-echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
-./philo 5 800 200 200 4
-echo
-
-echo -e "${YELLOW}Test: die or finish the meal ?${RESET}"
-echo -e "${GREEN}./philo 4 310 200 100 1${RESET}"
-./philo 4 310 200 100
-echo
-
 echo -e "${YELLOW}Test: die${RESET}"
 echo -e "${GREEN}./philo 4 310 200 100${RESET}"
 ./philo 4 310 200 100
 echo
 
-#With valgrind
+echo "Test finish the meal"
 
-echo -e "${YELLOW} RUN TEST WITH VALGRIND${RESET}"
+echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
+echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
+./philo 5 800 200 200 4
+echo
+
+echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
+echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
+./philo 5 800 200 200 7
+echo
+
+echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
+echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
+./philo 2 200 100 100 10
+echo
+
+
+
+
+
+
+echo -e "${YELLOW} RUN TEST WITH VALGRIND--tool=helgrind${RESET}"
 
 
 echo
@@ -227,7 +246,7 @@ valgrind --tool=helgrind ./philo 1 200 100 100
 echo
 
 echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
-echo -e "${GREEN}./philo 5 800 200 200 4${RESET}"
+echo -e "${GREEN}./philo 5 800 200 200 7${RESET}"
 valgrind --tool=helgrind./philo 5 800 200 200 4
 echo
 

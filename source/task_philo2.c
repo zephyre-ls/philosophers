@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:36:13 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:25:25 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 08:16:26 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,3 @@ void	print_state_philo(t_philo *philo, char *txt)
 	printf("\033[1;33m⏲︎\033[0m %5ld   %3d  %-20s\n", time, philo->id, txt);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
 }
-
-
