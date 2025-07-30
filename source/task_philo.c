@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 17:38:54 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/29 23:28:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*start_monitoring(void *arg)
 {
 	t_rules	*rules;
 	int		i;
+	int		status;
 
 	rules = (t_rules *)arg;
 	while (!end_simulation(rules->philo))
@@ -41,8 +42,10 @@ void	*start_monitoring(void *arg)
 		i = 0;
 		while (i < rules->nbr_philo)
 		{
-			if (death_or_not_death(&rules->philo[i])
-				|| rules->philo_finish == rules->nbr_philo)
+			pthread_mutex_lock(&rules->meal_mutex);
+			status = (rules->philo_finish == rules->nbr_philo);
+			pthread_mutex_unlock(&rules->meal_mutex);
+			if (death_or_not_death(&rules->philo[i]) || status)
 			{
 				pthread_mutex_lock(&rules->end_simulation_mutex);
 				rules->is_dead_end_simulation = 1;

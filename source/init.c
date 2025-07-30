@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 02:08:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 08:42:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_argv(t_rules *rules, char **argv)
 	if (rules->nbr_philo <= 0 || rules->time_to_die <= 0
 		|| rules->time_to_eat <= 0 || rules->time_to_sleep <= 0)
 	{
-		printf("Erreur : Number invalid\n");
+		write(2, "Error: Number invalid : 0\n", 27);
 		return (1);
 	}
 	if (argv[5])
@@ -67,6 +67,7 @@ int	init_mutex(t_rules *rules)
 	pthread_mutex_init(&rules->meal_empty_mutex, NULL);
 	pthread_mutex_init(&rules->end_simulation_mutex, NULL);
 	pthread_mutex_init(&rules->last_meal_mutex, NULL);
+	pthread_mutex_init(&rules->meal_mutex, NULL);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:49:31 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:20 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 08:49:01 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_atoi(char *str)
 		nbr = nbr * 10 + (str[i] - '0');
 		if (nbr > INT_MAX)
 		{
-			printf("Erreur : Valeure supérieur à INT_MAX\n");
-			return (1);
+			write(2, "Value > INT_MAX ! ", 18);
+			return (-1);
 		}
 		i++;
 	}
@@ -43,7 +43,7 @@ int	only_number(char *argv)
 			i++;
 		else
 		{
-			printf("Erreur: Number Invalid\n");
+			write(2, "Number positif only ! ", 23);
 			return (1);
 		}
 	}
@@ -56,16 +56,21 @@ int	parsing_args(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 	{
-		printf("./philo number_philo, time_to_die, time_to_eat, time_to_sleep, \
-		optionnal: number_of_meal\n");
+		write(2, "./philo number_philo, time_to_die, \
+time_to_eat, time_to_sleep, optionnal: number_of_meal\n", 90);
 		return (1);
 	}
 	i = 1;
 	while (i < argc)
 	{
-		if (only_number(argv[i]) || ft_atoi(argv[i]) <= 0)
+		if (only_number(argv[i]))
 		{
-			printf("Erreur: Argument invalid\n");
+			write(2, "Error: Number Invalid\n", 23);
+			return (1);
+		}
+		if (ft_atoi(argv[i]) <= 0)
+		{
+			write(2, "Error: Arugment invalid\n", 25);
 			return (1);
 		}
 		i++;

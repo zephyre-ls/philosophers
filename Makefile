@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 11:38:03 by lduflot           #+#    #+#              #
-#    Updated: 2025/05/01 15:35:42 by lduflot          ###   ########.fr        #
+#    Updated: 2025/07/30 08:09:06 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,10 @@ OBJS = $(FILES:.c=.o)
 ## RULES
 
 
-all: intro $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n Les philosophers attendent vos instructions.\n"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-intro:
 	@echo "                                                                                "
 	@echo "                               \033[1m⚙️  PHILOSOPHERS ⚙️\033[0m                              "
 	@echo "                                                                                "
@@ -76,6 +73,7 @@ intro:
 	@echo " "
 	@echo "                              🌑 🌒 🌓 🌔 🌕 🌖 🌗 🌘                      "
 	@echo " "
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
