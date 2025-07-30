@@ -6,20 +6,20 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:53:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/05/11 13:16:29 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:14:16 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 /*
-	* pthread create
-	* *thread = pointeur vers une variable qui recoit l'id du thread crée
-	* const pthread_attr_t *attr = pointeur vers struct du thread (NULL)
-	* *(start_routine)(void *) = fct que le thread va effectué
-	* void *arg = arg a passé a la fonction
-	*/
-
+Creation thread pour chaque philo; et creation thread_monitor
+pthread create =
+-*thread = pointeur vers une variable qui recoit l'id du thread crée
+-const pthread_attr_t *attr = pointeur vers struct du thread (NULL)
+-*(start_routine)(void *) = fct que le thread va effectué
+-void *arg = arg a passé a la fonction
+*/
 int	create_thread(t_philo *philo, t_rules *rules)
 {
 	int	i;
@@ -34,6 +34,9 @@ int	create_thread(t_philo *philo, t_rules *rules)
 	return (0);
 }
 
+/*
+Attend la fin de tous les threads philo avec join
+*/
 void	wait_threads_philo(t_philo *philo, t_rules *rules)
 {
 	int	i;

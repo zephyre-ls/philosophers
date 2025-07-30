@@ -6,12 +6,16 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 11:15:19 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 08:42:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:07:12 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+/*
+Initialise les val arg, les stock dans struct rules
+Verification des valeurs > 0
+*/
 int	init_argv(t_rules *rules, char **argv)
 {
 	rules->nbr_philo = ft_atoi(argv[1]);
@@ -38,6 +42,9 @@ int	init_argv(t_rules *rules, char **argv)
 	return (0);
 }
 
+/*
+Initialise meal_left et last_meal
+*/
 void	init_meal(t_rules *rules, t_philo *philo)
 {
 	int	i;
@@ -51,6 +58,10 @@ void	init_meal(t_rules *rules, t_philo *philo)
 	}
 }
 
+/*
+Initialise mutex
+Initialise start_time
+*/
 int	init_mutex(t_rules *rules)
 {
 	int	i;
@@ -71,6 +82,10 @@ int	init_mutex(t_rules *rules)
 	return (0);
 }
 
+/*
+Initialise id_philo;
+Intialise id_fork;
+*/
 int	init_philo_fork(t_rules *rules, t_philo *philo)
 {
 	int	i;

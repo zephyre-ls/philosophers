@@ -247,7 +247,7 @@ echo
 
 echo -e "${YELLOW}Test: no die, finish the meal${RESET}"
 echo -e "${GREEN}./philo 5 800 200 200 7${RESET}"
-valgrind --tool=helgrind./philo 5 800 200 200 4
+valgrind --tool=helgrind ./philo 5 800 200 200 4
 echo
 
 echo -e "${YELLOW}Test: die or finish the meal ?${RESET}"

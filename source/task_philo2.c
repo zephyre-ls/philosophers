@@ -6,18 +6,24 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:36:13 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 08:16:26 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:11:39 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+/*
+Liberation des forks
+*/
 void	unlock_thread(t_philo *philo)
 {
 	pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
 	pthread_mutex_unlock(&philo->rules->forks[philo->right_fork_id]);
 }
 
+/*
+Incremente nbr meal
+*/
 int	count_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->meal_mutex);

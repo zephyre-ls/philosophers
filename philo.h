@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:23:03 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:15:33 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			count_meal(t_philo *philo);
 void		unlock_thread(t_philo *philo);
 int			day_start(t_philo *philo);
 int			end_simulation(t_philo *philo);
+
 // Mutex
 int			init_mutex(t_rules *rules);
 void		free_mutex(t_philo *philo, t_rules *rules);

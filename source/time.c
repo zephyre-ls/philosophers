@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 19:44:00 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:14:25 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
  * suseconds_t	tv_usec//microsecondes }
  * gettimeofday 	int gettimeofday(struct timeval *tv, struct timezone *tz);
 */
-
 long long	real_time(void)
 {
 	struct timeval	current_time;

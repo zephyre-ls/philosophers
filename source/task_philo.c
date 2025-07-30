@@ -6,17 +6,15 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 23:28:02 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:20:22 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 /*
- * Prise des forks = ordre pair
- * Evite le dead_lock !
- *
- */
+Cas pour 1 philosopher
+*/
 void	only_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
@@ -30,6 +28,9 @@ void	only_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->rules->end_simulation_mutex);
 }
 
+/*
+Thread monitor: surveille mort, end_simulation
+*/
 void	*start_monitoring(void *arg)
 {
 	t_rules	*rules;
@@ -59,6 +60,9 @@ void	*start_monitoring(void *arg)
 	return (NULL);
 }
 
+/*
+Routine pour tous les philosophers
+*/
 void	*start_routine(void *arg)
 {
 	t_philo	*philo;
@@ -96,6 +100,13 @@ int	day_start(t_philo *philo)
 	return (0);
 }
 
+/*
+Attribution des fork pour eviter le Deadlocks;
+Chaque philo à une fork droite/gauche
+Alterne l'ordre de prise:
+Philo.id.pair = prend left puis right
+Philo.id.impair = prend right puis left
+*/
 void	take_forks(t_philo *philo)
 {
 	print_state_philo(philo, "is thinking  💭");

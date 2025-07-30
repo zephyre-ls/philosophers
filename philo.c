@@ -6,37 +6,29 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:34 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/29 20:23:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/07/30 09:19:56 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* A  gerer:
-* leaks quand on interromp le programme; => non corrigeable 
-* parsing ne fonctionne plus et meme si mauvais argument progamm se lance => OK
-* gestion de l'option nbr de repas 
-* mon temps apparait en négatif : POURQUOOOOOOI ?
+/* Philosophers
+__________
+Thread : sous process, exe en parrallèle, partage le même espace memoire
+Dans philo: 1 thread monitor et chaque philo est un thread
+___________
+Mutex (mutual exclusion) : verouille une ressource pour qu'un seul thread y
+accède à la fois.
+___________
+Starvation (famine) : Si les ressources sont toujours prise par les autres,
+le philo peut ne jamais manger
+___________
+Deadlock (interblocage) : bloqué avec une fourchette, par de unlock, mauvaise
+répartition des ressources
+___________
+Data race : Deux threads accédent à la même var sans protection.
+Corrigé en protégeant lecture/écriture par des mutex
 */
-
-void	free_mutex(t_philo *philo, t_rules *rules)
-{
-	int	i;
-
-	i = 0;
-	while (i < rules->nbr_philo)
-	{
-		pthread_mutex_destroy(&rules->forks[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&rules->print_mutex);
-	pthread_mutex_destroy(&rules->death_mutex);
-	pthread_mutex_destroy(&rules->meal_empty_mutex);
-	pthread_mutex_destroy(&rules->last_meal_mutex);
-	pthread_mutex_destroy(&rules->meal_mutex);
-	free(philo);
-	free(rules->forks);
-}
 
 int	main(int argc, char **argv)
 {
@@ -63,4 +55,23 @@ int	main(int argc, char **argv)
 	wait_threads_philo(philo, &rules);
 	free_mutex(philo, &rules);
 	return (0);
+}
+
+void	free_mutex(t_philo *philo, t_rules *rules)
+{
+	int	i;
+
+	i = 0;
+	while (i < rules->nbr_philo)
+	{
+		pthread_mutex_destroy(&rules->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&rules->print_mutex);
+	pthread_mutex_destroy(&rules->death_mutex);
+	pthread_mutex_destroy(&rules->meal_empty_mutex);
+	pthread_mutex_destroy(&rules->last_meal_mutex);
+	pthread_mutex_destroy(&rules->meal_mutex);
+	free(philo);
+	free(rules->forks);
 }
