@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 09:15:33 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:30:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_philo
 
 // Time
 long long	real_time(void);
+int	ft_usleep(long time);
 
 // Parsing
 int			ft_atoi(char *str);

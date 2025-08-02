@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:29:37 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 09:04:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:35:39 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	death_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->death_mutex);
 	if (philo->rules->is_dead_end_simulation == 0)
-		print_state_philo(philo, "is died 💀");
+		print_state_philo(philo, "is died");
 	pthread_mutex_unlock(&philo->rules->death_mutex);
 }
 
@@ -43,7 +43,7 @@ int	death_or_not_death(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->last_meal_mutex);
 	result = real_time() - philo->last_meal;
 	pthread_mutex_unlock(&philo->rules->last_meal_mutex);
-	if (result > philo->rules->time_to_die + 1)
+	if (result > philo->rules->time_to_die)
 	{
 		death_philo(philo);
 		pthread_mutex_lock(&philo->rules->end_simulation_mutex);
@@ -76,6 +76,5 @@ Mutex: meal_empty
 void	meal_empty(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->meal_empty_mutex);
-	print_state_philo(philo, "has finished all his meals. 🤤👉☕️");
 	pthread_mutex_unlock(&philo->rules->meal_empty_mutex);
 }

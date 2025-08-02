@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 09:14:25 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:36:56 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,14 @@ long long	real_time(void)
 	time_ms = time_seconde + time_microseconde;
 	return (time_ms);
 }
+
+int	ft_usleep(long time)
+{
+	long	start;
+
+	start = real_time();
+	while ((real_time() - start) < time)
+		usleep(50);
+	return (0);
+}
+

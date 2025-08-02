@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:36:13 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 09:11:39 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:39:37 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	print_state_philo(t_philo *philo, char *txt)
 	long	current;
 	long	time;
 
+	pthread_mutex_lock(&philo->rules->print_mutex);
 	if (end_simulation(philo))
+	{
+		pthread_mutex_unlock(&philo->rules->print_mutex);
 		return ;
+	}
 	current = real_time();
 	time = current - philo->rules->start_time;
-	pthread_mutex_lock(&philo->rules->print_mutex);
-	printf("\033[1;33m⏲︎\033[0m %5ld   %3d  %-20s\n", time, philo->id, txt);
+	printf("%ld   %d  %s\n", time, philo->id, txt);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
 }

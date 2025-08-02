@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/07/30 09:20:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:31:34 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ Cas pour 1 philosopher
 void	only_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
-	print_state_philo(philo, "has taken a fork ψ");
-	print_state_philo(philo, "is thinking 💭");
+	print_state_philo(philo, "has taken a fork");
+	print_state_philo(philo, "is thinking");
 	usleep(philo->rules->time_to_die * 1000);
-	print_state_philo(philo, "is died 💀");
+	print_state_philo(philo, "is died");
 	pthread_mutex_unlock(&philo->rules->forks[philo->left_fork_id]);
 	pthread_mutex_lock(&philo->rules->end_simulation_mutex);
 	philo->rules->is_dead_end_simulation = 1;
@@ -55,7 +55,7 @@ void	*start_monitoring(void *arg)
 			}
 			i++;
 		}
-		usleep(1000);
+		ft_usleep(1000);
 	}
 	return (NULL);
 }
@@ -87,16 +87,16 @@ int	day_start(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->last_meal_mutex);
 	philo->last_meal = real_time();
 	pthread_mutex_unlock(&philo->rules->last_meal_mutex);
-	print_state_philo(philo, "is eating 🍝");
-	usleep(philo->rules->time_to_eat * 1000);
+	print_state_philo(philo, "is eating");
+	ft_usleep(philo->rules->time_to_eat);
 	if (count_meal(philo) == 1)
 	{
 		meal_empty(philo);
 		return (1);
 	}
 	unlock_thread(philo);
-	print_state_philo(philo, "is sleeping 💤");
-	usleep(philo->rules->time_to_sleep * 1000);
+	print_state_philo(philo, "is sleeping");
+	ft_usleep(philo->rules->time_to_sleep);
 	return (0);
 }
 
@@ -109,19 +109,19 @@ Philo.id.impair = prend right puis left
 */
 void	take_forks(t_philo *philo)
 {
-	print_state_philo(philo, "is thinking  💭");
+	print_state_philo(philo, "is thinking");
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
-		print_state_philo(philo, "has taken a fork left ψ");
+		print_state_philo(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
-		print_state_philo(philo, "has taken a fork right ψ");
+		print_state_philo(philo, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->rules->forks[philo->right_fork_id]);
-		print_state_philo(philo, "has taken a fork right ψ");
+		print_state_philo(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->rules->forks[philo->left_fork_id]);
-		print_state_philo(philo, "has taken a fork left ψ");
+		print_state_philo(philo, "has taken a fork");
 	}
 }
