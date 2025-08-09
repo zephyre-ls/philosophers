@@ -215,31 +215,6 @@ echo -e "${GREEN}./philo 4 800f 200 200 7${RESET}"
 echo
 
 echo
-echo -e "${YELLOW}Test: all arguments 10ms${RESET}"
-echo -e "${GREEN}./philo 4 10 10 10${RESET}"
-valgrind --tool=helgrind ./philo 4 10 10 1
-echo
-
-echo
-echo -e "${YELLOW}Test: all arguments 10ms${RESET}"
-echo -e "${GREEN}./philo 4 10 10 10${RESET}"
-valgrind --tool=helgrind ./philo 4 1 1 1
-echo
-
-
-echo
-echo -e "${YELLOW}Test: death short${RESET}"
-echo -e "${GREEN}./philo 5 100 60 60${RESET}"
-valgrind --tool=helgrind ./philo 5 100 60 60
-echo
-
-echo
-echo -e "${YELLOW}Test: die${RESET}"
-echo -e "${GREEN}./philo 4 400 200 200${RESET}"
-valgrind --tool=helgrind ./philo 4 400 200 200
-echo
-
-echo
 echo -e "${YELLOW}Test: die${RESET}"
 echo -e "${GREEN}./philo 1 200 100 100${RESET}"
 valgrind --tool=helgrind ./philo 1 200 100 100

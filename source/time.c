@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:55:12 by lduflot           #+#    #+#             */
-/*   Updated: 2025/08/02 10:36:56 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/09 19:48:22 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int	ft_usleep(long time)
 		usleep(50);
 	return (0);
 }
-

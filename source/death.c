@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:29:37 by lduflot           #+#    #+#             */
-/*   Updated: 2025/08/02 10:35:39 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/09 19:37:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,4 @@ int	end_simulation(t_philo *philo)
 	dead = philo->rules->is_dead_end_simulation;
 	pthread_mutex_unlock(&philo->rules->end_simulation_mutex);
 	return (dead);
-}
-
-/*
-Affichage que le philo à terminé ses repas
-Mutex: meal_empty
-*/
-void	meal_empty(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->rules->meal_empty_mutex);
-	pthread_mutex_unlock(&philo->rules->meal_empty_mutex);
 }

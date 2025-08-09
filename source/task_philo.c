@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 11:01:30 by lduflot           #+#    #+#             */
-/*   Updated: 2025/08/02 10:31:34 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/09 19:38:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ int	day_start(t_philo *philo)
 	print_state_philo(philo, "is eating");
 	ft_usleep(philo->rules->time_to_eat);
 	if (count_meal(philo) == 1)
-	{
-		meal_empty(philo);
 		return (1);
-	}
 	unlock_thread(philo);
 	print_state_philo(philo, "is sleeping");
 	ft_usleep(philo->rules->time_to_sleep);

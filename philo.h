@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:41:39 by lduflot           #+#    #+#             */
-/*   Updated: 2025/08/02 10:30:58 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/08/09 19:48:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_rules
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	meal_mutex;
-	pthread_mutex_t	meal_empty_mutex;
 	pthread_mutex_t	end_simulation_mutex;
 	pthread_mutex_t	last_meal_mutex;
 	pthread_t		monitor_death_thread;
@@ -60,7 +59,7 @@ typedef struct s_philo
 
 // Time
 long long	real_time(void);
-int	ft_usleep(long time);
+int			ft_usleep(long time);
 
 // Parsing
 int			ft_atoi(char *str);
@@ -88,6 +87,5 @@ int			init_mutex(t_rules *rules);
 void		free_mutex(t_philo *philo, t_rules *rules);
 void		death_philo(t_philo *philo);
 int			death_or_not_death(t_philo *philo);
-void		meal_empty(t_philo *philo);
 
 #endif
