@@ -55,7 +55,7 @@ void	*start_monitoring(void *arg)
 			}
 			i++;
 		}
-		ft_usleep(1000);
+		ft_usleep(1);
 	}
 	return (NULL);
 }
